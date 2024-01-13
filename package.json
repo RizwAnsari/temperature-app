@@ -1,0 +1,19 @@
+{
+  "name": "temperature-app",
+  "version": "1.0.0",
+  "description": "A Node.js application using TypeScript, PostgreSQL, Docker, and Docker Compose is needed. The application efficiently save the contents of a large file (100 MB or more) containing temperature readings in the format city_id, temp, timestamp using task queues. Additionally, a REST API that returns the mean, max, and min temperature of a city.",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RizwAnsari/temperature-app.git"
+  },
+  "author": "RizwAnsari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RizwAnsari/temperature-app/issues"
+  },
+  "homepage": "https://github.com/RizwAnsari/temperature-app#readme"
+}
