@@ -1,0 +1,27 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    db: 
+      image: postgres
+      environment: 
+        POSTGRES_USER: '${DB_USER}'
+        POSTGRES_PASSWORD: '${DB_PASSWORD}'
+        POSTGRES_DB: '${DB_DATABASE}'
+      ports:
+        - '${FORWARD_DB_PORT:-5432}:5432'
+      volumes:
+            - 'postgres-data:/var/lib/postgresql/data'
+
+    app:
+      build:
+        dockerfile: Dockerfile
+      ports:
+        - '${APP_PORT:-3000}:3000'
+      volumes:
+            - '.:/var/www/temperature_app'
+      depends_on:
+        - db
+
+volumes:
+  postgres-data:
+        driver: local
