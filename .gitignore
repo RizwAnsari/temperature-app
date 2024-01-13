@@ -1,4 +1,5 @@
 # Dependency directories
+build/
 node_modules/
 
 # Application specific configs
