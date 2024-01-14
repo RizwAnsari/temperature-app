@@ -8,10 +8,21 @@ datasource db {
 }
 
 model City {
-  id         Int      @id @default(autoincrement())
-  name       String   @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
+  temperature Temperature[]
 
   @@map(name: "cities")
+}
+
+model Temperature {
+  id         Int      @id @default(autoincrement())
+  city       City     @relation(fields: [city_id], references: [id])
+  city_id    Int
+  temp       Decimal
+  updated_at DateTime
+
+  @@map(name: "temperatures")
 }
