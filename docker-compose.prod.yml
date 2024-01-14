@@ -13,11 +13,9 @@ services:
 
   app:
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     ports:
       - ${APP_PORT:-3000}:3000
-    volumes:
-      - ./:/var/www/temperature_app
     depends_on:
       - db
 
