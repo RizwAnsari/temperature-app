@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { response } from "../utils/helpers";
 import * as Temperature from "../models/Temperature";
+import tempBulkInsertQueue from "../queues/TempBulkInsertQueue";
 
 const cityStats = async (req: Request, res: Response) => {
   try {
@@ -31,9 +32,31 @@ const cityStats = async (req: Request, res: Response) => {
     return response(
       res,
       "Something went wrong!, Please try again later",
-      false
+      false,
+      {},
+      500
     );
   }
 };
 
-export { cityStats };
+const bulkInsert = async (req: Request, res: Response) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return response(res, "Please a upload a file.", false, {}, 400);
+    }
+    tempBulkInsertQueue.add("processTempBulkInsert", { file });
+
+    return response(res, "File is queued for processing.");
+  } catch (e) {
+    return response(
+      res,
+      "Something went wrong!, Please try again later",
+      false,
+      {},
+      500
+    );
+  }
+};
+
+export { cityStats, bulkInsert };

@@ -13,7 +13,7 @@ services:
     networks:
       - app-network
 
-  app:
+  server:
     build:
       dockerfile: Dockerfile
     ports:
@@ -24,7 +24,16 @@ services:
       - app-network
     depends_on:
       - db
-      
+
+  redis:
+    image: redis
+    ports:
+      - ${FORWARD_REDIS_PORT:-6379}:6379
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+
 networks:
   app-network:
     name: app-network
@@ -32,4 +41,6 @@ networks:
 
 volumes:
   postgres-data:
+    driver: local
+  redis-data:
     driver: local
