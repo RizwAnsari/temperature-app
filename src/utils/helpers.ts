@@ -15,4 +15,10 @@ const response = (
   return res.status(status).send(responseData);
 };
 
-export { response };
+const excelDateToDate = (excel_date: number) => {
+  return new Date(
+    Math.round((excel_date - 25569) * 86400 * 1000)
+  ).toISOString();
+};
+
+export { response, excelDateToDate };

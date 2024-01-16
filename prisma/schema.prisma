@@ -19,11 +19,11 @@ model City {
 }
 
 model Temperature {
-  id         Int      @id @default(autoincrement())
-  city       City     @relation(fields: [city_id], references: [id])
-  city_id    Int
-  temp       Decimal
-  updated_at DateTime
+  id        Int      @id @default(autoincrement())
+  city      City     @relation(fields: [city_id], references: [id])
+  city_id   Int
+  temp      Decimal  @db.Decimal(6, 3)
+  timestamp DateTime
 
   @@map(name: "temperatures")
 }

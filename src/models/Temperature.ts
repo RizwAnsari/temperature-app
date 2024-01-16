@@ -16,4 +16,8 @@ const stats = async (city_id: number) => {
   });
 };
 
-export { exists, stats };
+const bulkInsert = async (data: any) => {
+  return await prisma.temperature.createMany({ data });
+};
+
+export { exists, stats, bulkInsert };

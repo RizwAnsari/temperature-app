@@ -12,7 +12,7 @@ const cityStats = async (req: Request, res: Response) => {
       let formattedData = {
         min: stats._min.temp,
         max: stats._max.temp,
-        mean: stats._avg.temp,
+        mean: stats._avg.temp?.toFixed(2),
       };
       return response(
         res,
@@ -45,7 +45,18 @@ const bulkInsert = async (req: Request, res: Response) => {
     if (!file) {
       return response(res, "Please a upload a file.", false, {}, 400);
     }
-    tempBulkInsertQueue.add("processTempBulkInsert", { file });
+
+    tempBulkInsertQueue.add(
+      "processTempBulkInsert",
+      { file },
+      {
+        attempts: parseInt(process.env.QUEUE_RETRY_ATTEMPTS || "3"),
+        backoff: {
+          type: process.env.QUEUE_BACKOFF_TYPE || "",
+          delay: parseInt(process.env.QUEUE_RETRY_DELAY || "1000"),
+        },
+      }
+    );
 
     return response(res, "File is queued for processing.");
   } catch (e) {

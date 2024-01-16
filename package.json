@@ -9,7 +9,8 @@
     "seed": "node prisma/seed/city.js",
     "build": "rm -rf build && tsc",
     "dev": "nodemon --watch src/ --exec ts-node src/app.ts",
-    "start": "npm run build && node build/app.js"
+    "start": "npm run build && node build/app.js",
+    "worker": "node build/queues/worker.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "bull": "^4.12.1",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "xlsx": "^0.18.5"
   }
 }
