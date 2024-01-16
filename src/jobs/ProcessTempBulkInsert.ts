@@ -80,7 +80,7 @@ tempBulkInsertQueue.on("active", (job: Job) => {
 });
 
 tempBulkInsertQueue.on("completed", (job: Job) => {
-  console.log(`Job #${job.id} completed with\n`);
+  console.log(`Job #${job.id} completed\n`);
 });
 
 tempBulkInsertQueue.on("failed", (job: Job, error: any) => {

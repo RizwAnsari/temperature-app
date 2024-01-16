@@ -1,6 +1,8 @@
 import express, { Express, Request, Response } from "express";
+import * as AuthController from "./controllers/AuthController";
 import * as TempController from "./controllers/TemperatureController";
 import upload from "./configs/multer";
+import auth from "./middlewares/auth";
 import "dotenv/config";
 
 const app: Express = express();
@@ -11,14 +13,20 @@ app.get("/", async (req: Request, res: Response) => {
 });
 
 app.get(
+  "/generate-token",
+  async (req: Request, res: Response) => await AuthController.token(req, res)
+);
+
+app.get(
   "/temperatures/city/:id",
+  auth,
   async (req: Request, res: Response) =>
     await TempController.cityStats(req, res)
 );
 
 app.post(
   "/temperatures/upload",
-  upload.single("file"),
+  [auth, upload.single("file")],
   async (req: Request, res: Response) =>
     await TempController.bulkInsert(req, res)
 );
