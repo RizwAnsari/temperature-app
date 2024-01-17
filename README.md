@@ -33,7 +33,7 @@
 ![Sample](./public/readme/docker-worker.png)
 
 - ```/temperatures/city/{city_id}```
-> Use above route to get the temperature statistics for the specified city id.
+> Use above route to get the temperature statistics from the cache table for the specified city id.
 
 ![Sample](./public/readme/temperatures-city-id.png)
 > <span style="color:red;">Note: </span>At the time the app only supports ```.xlsx``` file containing ```city_id```, ```temp```, ```timestamp``` columns, [Download Sample File](./public/readme/sample.xlsx). 
@@ -41,4 +41,4 @@
 ![Sample](./public/readme/temperatures-upload-demo.png)
 > <span style="color:red;">Note: </span>Please add JWT token in the authorization header as ```Bearer Token``` for the last two routes.
 
-> <span style="color:red;">The application has not been tested for large file sizes due to a lack of extensive data. There are opportunities for numerous optimizations, improvements and in error handling.</span>
+> <span style="color:red;">Note: The application has not been tested for large file sizes due to a lack of extensive data. There are opportunities for numerous optimizations, improvements and in error handling.</span>
