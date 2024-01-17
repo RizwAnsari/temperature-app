@@ -51,7 +51,7 @@
 
 > - `/temperatures/city/{city_id}`
 >
-> Use above route to get the temperature statistics for the specified city id.
+>  Use above route to get the temperature statistics from the cache table for the specified city id.
 >
 > ![Sample](./public/readme/temperatures-city-id.png)
 >
