@@ -9,11 +9,12 @@ datasource db {
 }
 
 model City {
-  id          Int           @id @default(autoincrement())
-  name        String        @unique
-  created_at  DateTime      @default(now())
-  updated_at  DateTime      @updatedAt
-  temperature Temperature[]
+  id                Int               @id @default(autoincrement())
+  name              String            @unique
+  created_at        DateTime          @default(now())
+  updated_at        DateTime          @updatedAt
+  temperature       Temperature[]
+  temperature_cache TemperatureCache?
 
   @@map(name: "cities")
 }
@@ -26,4 +27,16 @@ model Temperature {
   timestamp DateTime
 
   @@map(name: "temperatures")
+}
+
+model TemperatureCache {
+  id         Int      @id @default(autoincrement())
+  city       City     @relation(fields: [city_id], references: [id])
+  city_id    Int      @unique
+  min        Decimal  @db.Decimal(6, 3)
+  max        Decimal  @db.Decimal(6, 3)
+  mean       Decimal  @db.Decimal(6, 3)
+  updated_at DateTime @default(now())
+
+  @@map(name: "temperature_cache")
 }

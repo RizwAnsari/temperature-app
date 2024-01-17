@@ -1,25 +1,15 @@
 import { Request, Response } from "express";
 import { response } from "../utils/helpers";
+import * as Cache from "../models/TemperatureCache";
 import * as Temperature from "../models/Temperature";
 import tempBulkInsertQueue from "../queues/TempBulkInsertQueue";
 
 const cityStats = async (req: Request, res: Response) => {
   try {
     const cityId = parseInt(req.params.id);
-    const exists = await Temperature.exists(cityId);
-    if (exists) {
-      const stats = await Temperature.stats(cityId);
-      let formattedData = {
-        min: stats._min.temp,
-        max: stats._max.temp,
-        mean: stats._avg.temp?.toFixed(2),
-      };
-      return response(
-        res,
-        "Temperature statistics in celsius",
-        true,
-        formattedData
-      );
+    const stats = await Cache.stats(cityId);
+    if (stats) {
+      return response(res, "Temperature statistics in celsius", true, stats);
     }
     return response(
       res,

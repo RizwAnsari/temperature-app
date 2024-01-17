@@ -2,6 +2,7 @@ import Bull, { Job } from "bull";
 import tempBulkInsertQueue from "../queues/TempBulkInsertQueue";
 import { Range, Sheet, WorkBook, read, utils } from "xlsx";
 import * as Temperature from "../models/Temperature";
+import * as Cache from "../models/TemperatureCache";
 import { excelDateToDate } from "../utils/helpers";
 
 console.log("Worker is running, Press Ctrl+c to exit...\n");
@@ -60,6 +61,8 @@ const processHandler = async (job: Bull.Job) => {
       const sheet: Sheet = workbook.Sheets[sheetName];
       await processSheet(sheet, chunkSize);
     }
+
+    await generateCache();
   } catch (error) {
     const errorName: string = (error as Error).name;
     throw new Error(
@@ -67,6 +70,26 @@ const processHandler = async (job: Bull.Job) => {
         job.opts.attempts
       })`
     );
+  }
+};
+
+const generateCache = async () => {
+  try {
+    const stats: Array<any> = await Temperature.stats();
+
+    let mappedData = stats.map((stat) => {
+      return {
+        city_id: stat.city_id,
+        min: stat._min.temp,
+        max: stat._max.temp,
+        mean: stat._avg.temp,
+      };
+    });
+
+    await Cache.truncate();
+    await Cache.create(mappedData);
+  } catch (error) {
+    console.log("Failed to create Cache data.");
   }
 };
 

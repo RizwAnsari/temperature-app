@@ -7,7 +7,7 @@ const exists = async (city_id: number) => {
   });
 };
 
-const stats = async (city_id: number) => {
+const singleCityStats = async (city_id: number) => {
   return await prisma.temperature.aggregate({
     _avg: { temp: true },
     _min: { temp: true },
@@ -20,4 +20,13 @@ const bulkInsert = async (data: any) => {
   return await prisma.temperature.createMany({ data });
 };
 
-export { exists, stats, bulkInsert };
+const stats = async () => {
+  return prisma.temperature.groupBy({
+    by: "city_id",
+    _avg: { temp: true },
+    _min: { temp: true },
+    _max: { temp: true },
+  });
+};
+
+export { exists, singleCityStats, bulkInsert, stats };
