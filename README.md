@@ -35,7 +35,7 @@
 >
 > ![Sample](./public/readme/auth-generate-token.png)
 
-> - `/temperatures/upload`
+> - protected `/temperatures/upload`
 >
 > Use above route to bulk insert temperature data. This route will add the task in the queue for processing. Queue will retry the failed job for specified number of times exponentially.
 >
@@ -50,12 +50,12 @@
 >
 > ![Sample](./public/readme/docker-worker.png)
 
-> - `/temperatures/city/{city_id}`
+> - protected `/temperatures/city/{city_id}`
 >
 >  Use above route to get the temperature statistics from the cache table for the specified city id.
 >
 > ![Sample](./public/readme/temperatures-city-id.png)
 >
-> <span style="color:red;">Note: </span>Please add JWT token in the authorization header as `Bearer Token` for the last two routes.
+> <span style="color:red;">Note: </span>Please add JWT token in the authorization header as `Bearer Token` for the protected routes.
 
 > <span style="color:red;">The application has not been tested for large file sizes due to a lack of extensive data. There are opportunities for numerous optimizations, improvements and in error handling.</span>
