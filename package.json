@@ -1,7 +1,7 @@
 {
   "name": "temperature-app",
   "version": "1.0.0",
-  "description": "A Node.js application using TypeScript, PostgreSQL, Docker, and Docker Compose is needed. The application efficiently save the contents of a large file (100 MB or more) containing temperature readings in the format city_id, temp, timestamp using task queues. Additionally, a REST API that returns the mean, max, and min temperature of a city.",
+  "description": "A Node.js application using TypeScript, PostgreSQL, Docker, and Docker Compose. The application efficiently save the contents of a large file (100 MB or more) containing temperature readings in the format city_id, temp, timestamp using task queues. Additionally, a REST API that returns the mean, max, and min temperature of a city.",
   "main": "app.ts",
   "scripts": {
     "migrate": "npx prisma migrate dev && npx prisma generate",

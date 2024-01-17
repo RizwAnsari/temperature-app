@@ -38,6 +38,7 @@
 > - `/temperatures/upload`
 >
 > Use above route to bulk insert temperature data. This route will add the task in the queue for processing. Queue will retry the failed job for specified number of times exponentially.
+>
 > <span style="color:red;">Note: </span>At the time the app only supports `.xlsx` file containing `city_id`, `temp`, `timestamp` columns, [Download Sample File](./public/readme/sample.xlsx).
 > Upload file as form-data.
 >
