@@ -17,12 +17,6 @@
 - run ```docker compose -f docker-compose.prod.yml up```
 >Above command will start the services defined in ```docker-compose.prod.yml``` file. We will see three containers running namely ```server```, ```db``` and ```redis```.
 
-- run ```docker exec temperature-app-server-1 npm run migrate-prod```
->Above command will execute in the docker container and migrate the database tables and generate prisma client.
-
-- run ```docker exec temperature-app-server-1 npm run seed```
->Above command will execute in the docker container and seed the cities table.
-
 - run ```docker exec temperature-app-server-1 npm run worker```
 >Above command will execute in the docker container and start the worker to process the queues.
 
