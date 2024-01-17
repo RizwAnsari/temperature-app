@@ -9,7 +9,7 @@
     "seed": "node prisma/seed/city.js",
     "build": "rm -rf build && tsc",
     "dev": "nodemon --watch src/ --exec ts-node src/app.ts",
-    "start": "npm run build && node build/app.js",
+    "start": "npm run migrate-prod && npm run seed && npm run build && node build/app.js",
     "worker": "node build/queues/worker.js"
   },
   "repository": {
